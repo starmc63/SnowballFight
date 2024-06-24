@@ -69,7 +69,7 @@ public class RemoveArmorOnHit implements SnowballModule, Listener {
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     private void onSnowballHit(ProjectileHitEvent event) {
         if (!event.getEntityType().equals(EntityType.SNOWBALL)) return;
-        if (event.getHitEntity() == null || event.getHitEntity().getType() != EntityType.PLAYER) return;
+        if(!(event.getEntity().getShooter() instanceof Player))return;        if (event.getHitEntity() == null || event.getHitEntity().getType() != EntityType.PLAYER) return;
 
         final Player player = (Player) event.getHitEntity();
         final PlayerInventory playerInventory = player.getInventory();

@@ -9,6 +9,7 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
@@ -86,7 +87,7 @@ public class LightningOnHit implements SnowballModule, Listener {
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     private void onSnowballHit(ProjectileHitEvent event) {
         if (!event.getEntityType().equals(EntityType.SNOWBALL)) return;
-        if (probability < 1.0 && SnowballFight.getRandom().nextDouble() > probability) return;
+        if(!(event.getEntity().getShooter() instanceof Player))return;        if (probability < 1.0 && SnowballFight.getRandom().nextDouble() > probability) return;
 
         final Entity hitEntity = event.getHitEntity();
         if (onlyForEntities) {

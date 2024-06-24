@@ -6,6 +6,7 @@ import me.xginko.snowballfight.SnowballConfig;
 import me.xginko.snowballfight.SnowballFight;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -81,6 +82,7 @@ public class KnockbackOnHit implements SnowballModule, Listener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private void onSnowballHit(ProjectileHitEvent event) {
         if (!event.getEntityType().equals(EntityType.SNOWBALL)) return;
+        if(!(event.getEntity().getShooter() instanceof Player))return;
         final Projectile snowball = event.getEntity();
         if (onlyForSpecificEntities && (asBlacklist == configuredTypes.contains(snowball.getType()))) return;
         final Entity hitEntity = event.getHitEntity();

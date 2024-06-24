@@ -6,6 +6,7 @@ import me.xginko.snowballfight.SnowballConfig;
 import me.xginko.snowballfight.SnowballFight;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
@@ -72,7 +73,7 @@ public class DamageOnHit implements SnowballModule, Listener {
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     private void onSnowballHit(ProjectileHitEvent event) {
         if (!event.getEntityType().equals(EntityType.SNOWBALL)) return;
-        if (!(event.getHitEntity() instanceof LivingEntity)) return;
+        if(!(event.getEntity().getShooter() instanceof Player))return;        if (!(event.getHitEntity() instanceof LivingEntity)) return;
 
         final LivingEntity living = (LivingEntity) event.getHitEntity();
         if (onlyForSpecificEntities && (asBlacklist == configuredTypes.contains(living.getType()))) return;

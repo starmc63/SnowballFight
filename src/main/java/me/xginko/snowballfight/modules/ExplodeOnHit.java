@@ -7,10 +7,7 @@ import me.xginko.snowballfight.SnowballFight;
 import me.xginko.snowballfight.events.PostSnowballExplodeEvent;
 import me.xginko.snowballfight.events.PreSnowballExplodeEvent;
 import org.bukkit.Location;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Snowball;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
@@ -85,7 +82,7 @@ public class ExplodeOnHit implements SnowballModule, Listener {
     @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     private void onSnowballHit(ProjectileHitEvent event) {
         if (!event.getEntityType().equals(EntityType.SNOWBALL)) return;
-
+        if(!(event.getEntity().getShooter() instanceof Player))return;
         final Entity hitEntity = event.getHitEntity();
 
         if (onlyForEntities) {
